@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="widget">
+        <div class="widget-heading clearfix">
+            <h3 class="widget-title pull-left list-inline">CSV </h3>
+            <button type="button" class="btn btn-primary pull-right"><i class="ti-upload mr-5"></i> Загрузить</button>
+        </div>
+        <div class="widget-body">
+            <form id="type-dz" class="dropzone" method="post">{% csrf_token %}</form>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        $("#type-dz").dropzone({
+            url: "{% url 'photo_upload:import' %}",
+            paramName: "import",
+            acceptedFiles: ".csv",
+            maxFilesize: 2,
+            maxThumbnailFilesize: .5,
+            thumbnailWidth: "250",
+            thumbnailHeight: "250",
+            dictDefaultMessage: "<i class='icon-dz fa fa-file-text-o'></i>Перетащите сюда файлы для загрузки"
+        });
+    </script>
+{% endblock %}
